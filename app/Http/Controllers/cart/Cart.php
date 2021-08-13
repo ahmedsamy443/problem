@@ -13,7 +13,7 @@ use Prophecy\Prophecy\Revealer;
 class Cart extends Controller
 {
     public function cartshow()
-    {   
+    {
       $collection= \Cart::getContent();
      // dd($collection);
         return view("cart.cartshow",["dervied"=>$collection]);
@@ -31,29 +31,22 @@ class Cart extends Controller
             return redirect()->back();
           }
      }
-     
+
      \Cart::add($rowid, $Product->name,$Product->price, $qantity, array());
           return redirect()->back()->with("productdetails")->with("message","item has been added sucessfuly to cart ");
-    } 
+    }
 
 
     public function updatecart(Request $req)
     {
-    //  $quantity = (int)$req->quantity[0];
-     // $row_value = (int)$req->quantity[1];
-      // var_dump($quantity,$row_value);die();
-      $data= \Cart::get($req->itemid);
-      dd($data);
-
-
-      \Cart::update($req->itemid,array([
-       "quantity"=>$req->quantity
-      ]));
+    $data= \Cart::get($req->itemid);
+      \Cart::update($req->itemid,array(
+       "quantity"=>1
+      ));
      return response()->json(["data"=>$data]);
-      // dd(\Cart::getContent());
-      
+
     }
-    
+
     public function removeitem($itemid)
     {
      // dd($text);
@@ -63,8 +56,8 @@ class Cart extends Controller
     // dd(\Cart::getSubTotal());
     //dd( \Cart::get($itemid)->quantity);
           \Cart::remove($itemid);
-        
+
             return redirect()->route("cartpage");
     }
-   
+
 }

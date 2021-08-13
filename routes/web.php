@@ -47,7 +47,7 @@ Route::get("categotory /delete/{categoryid}",[AdminCategortycontroller::class,"d
 Route::get("categotory /edit/{categoryid}",[AdminCategortycontroller::class,"edit"])->name("admineditcategry");
 Route::post("categotory /update/{categoryid}",[AdminCategortycontroller::class,"update"])->name("adminupdatecategory");
 
-/////shop routes 
+/////shop routes
 
 
 Route::get("shopcategorylist",[ShopCnotrller::class,"categorylist"])->name("shopproduct");
@@ -68,8 +68,6 @@ Route::get("removeitem/{cartitemid}",[Cart::class,"removeitem"])->name("removeit
 
 
 
-
-
 ///ckeckout
 Route::get("orderpage",[Orderscontroller::class,"orderpage"])->name("orderpage");
 Route::post("makeorder",[Orderscontroller::class,"storeorderitems"])->name("makeorder");
@@ -84,7 +82,7 @@ Route::post("makeorder",[Orderscontroller::class,"storeorderitems"])->name("make
 
 
 
- 
+
 
 
 

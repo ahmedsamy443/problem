@@ -1,7 +1,6 @@
 @extends("layout.layout")
 @section('content')
-
-
+{{-- @dd(session()->all()) --}}
     <!--main area-->
     <main id="main" class="main-site">
 
@@ -16,7 +15,7 @@
 
             @if (!Cart::isEmpty())
 			 {{-- {{dd($dervied)}}  --}}
-                @foreach ($dervied as $value => $item)
+                @foreach ($dervied as $value => $item )
 
                     <div class=" main-content-area">
                         <div class="wrap-iten-in-cart">
@@ -36,7 +35,7 @@
                                         <div class="quantity-input">
                                             {{-- <form action="{{route('updatethecart')}} " method="POST"> --}}
                                             {{-- @csrf --}}
-											
+
                                             <input type="number" id="quantity" name="quantity" readonly
 											value={{ $item['quantity'] }} max="1000" min="1" pattern="[0-9]*">
                                             <input type="hidden" value="{{ $value }}" class="row_value" id="rowvalue" name="rowvalue">
@@ -83,7 +82,7 @@
 
         </div>
         <!--end container-->
-        <script>
+        {{-- <script>
             $(function() {
 				$('.btn-increase').click(function(){
 					var s=$("#quantity").val();
@@ -104,6 +103,29 @@
                     });
 				});
             })
+        </script> --}}
+        <script>
+            $(function() {
+				$('.btn-increase').click(function(){
+                var itemid= $(this).parent().find("#rowvalue").val();
+                   // alert(s)
+                    $.ajax({
+                        url: '/updatecart',
+                        type : 'POST',
+                        data:{
+                            _token:"{{csrf_token()}}",
+                            itemid:itemid
+                        },
+                        success: function(data){
+                            /* implementation goes here */
+                        },
+                        error: function(jqXHR, textStatus, errorThrown) {
+                            /* implementation goes here */
+                        }
+                    });
+				});
+            })
         </script>
+
 
     @endsection
